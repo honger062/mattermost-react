@@ -354,6 +354,15 @@ app.get('/api/local-config', (req, res) => {
   try {
     let baseUrl = process.env.MM_BASE_URL || '';
     let sessionCookie = process.env.MM_SESSION_COOKIE || '';
+    let mmauthtoken = process.env.MM_MMAUTHTOKEN || '';
+    let mmcsrf = process.env.MM_MMCSRF || '';
+    
+    // 환경변수에서 개별 토큰이 있으면 자동 조합
+    if (!sessionCookie && mmauthtoken) {
+      sessionCookie = mmcsrf 
+        ? `MMAUTHTOKEN=${mmauthtoken}; MMCSRF=${mmcsrf}`
+        : `MMAUTHTOKEN=${mmauthtoken}`;
+    }
     
     // local-config.json이 있으면 우선 적용
     const cfgPath = path.join(__dirname, 'local-config.json');
@@ -362,16 +371,41 @@ app.get('/api/local-config', (req, res) => {
       const parsed = JSON.parse(raw || '{}');
       baseUrl = parsed.baseUrl || baseUrl;
       sessionCookie = parsed.sessionCookie || sessionCookie;
+      mmauthtoken = parsed.mmauthtoken || mmauthtoken;
+      mmcsrf = parsed.mmcsrf || mmcsrf;
+      
+      // local-config에서도 개별 토큰 자동 조합
+      if (!sessionCookie && mmauthtoken) {
+        sessionCookie = mmcsrf 
+          ? `MMAUTHTOKEN=${mmauthtoken}; MMCSRF=${mmcsrf}`
+          : `MMAUTHTOKEN=${mmauthtoken}`;
+      }
     }
     
     return res.json({
       baseUrl: String(baseUrl),
       sessionCookie: String(sessionCookie),
+      mmauthtoken: String(mmauthtoken),
+      mmcsrf: String(mmcsrf),
     });
   } catch (e) {
+    // 에러 시에도 개별 토큰 조합 시도
+    let baseUrl = process.env.MM_BASE_URL || '';
+    let sessionCookie = process.env.MM_SESSION_COOKIE || '';
+    let mmauthtoken = process.env.MM_MMAUTHTOKEN || '';
+    let mmcsrf = process.env.MM_MMCSRF || '';
+    
+    if (!sessionCookie && mmauthtoken) {
+      sessionCookie = mmcsrf 
+        ? `MMAUTHTOKEN=${mmauthtoken}; MMCSRF=${mmcsrf}`
+        : `MMAUTHTOKEN=${mmauthtoken}`;
+    }
+    
     return res.json({ 
-      baseUrl: process.env.MM_BASE_URL || '', 
-      sessionCookie: process.env.MM_SESSION_COOKIE || '' 
+      baseUrl,
+      sessionCookie,
+      mmauthtoken,
+      mmcsrf
     });
   }
 });

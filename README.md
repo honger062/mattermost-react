@@ -1,86 +1,44 @@
 # Mattermost Reaction Tools
 
-Mattermost 게시글에 커스텀 이모지 반응을 일괄 추가하는 도구 모음입니다.
+MatterMost에 댓글 반응을 연속적으로 빠르게 달아줍니다.
 
-## 프로젝트 구조
+## 실행법
 
-```
-mm_ex1/
-├── .env                      # 공통 환경변수 (gitignore)
-├── .env.example              # 환경변수 예시
-├── .gitignore                # Git 제외 파일
-└── tools/
-    ├── mm-reaction-cli/      # CLI 도구
-    └── mm-reaction-web/      # 웹 UI 도구
-```
+### 1. 설치
 
-## 환경변수 설정 (선택)
-
-루트에 `.env` 파일을 생성하여 공통 설정을 관리할 수 있습니다:
-
-```bash
-# .env.example을 .env로 복사
-cp .env.example .env
-```
-
-### 환경변수 목록
-
-```bash
-# Mattermost 서버 URL
-MM_BASE_URL=https://your-mattermost.example.com
-
-# Personal Access Token (선택)
-MM_TOKEN=your_personal_access_token_here
-
-# 세션 쿠키 (선택, PAT 대신 사용 가능)
-MM_SESSION_COOKIE=MMAUTHTOKEN=...; MMCSRF=...
-
-# 기본 포스트 ID (선택)
-MM_POST_ID=
-
-# 기본 딜레이 (ms, 선택)
-MM_DELAY_MS=120
-```
-
-## 설정 우선순위
-
-각 도구는 다음 순서로 설정을 읽습니다:
-
-1. **CLI 인자** (최우선)
-2. **local-config.json** (각 도구 디렉토리)
-3. **환경변수** (루트 `.env`)
-4. **config.json** (각 도구 디렉토리)
-
-## 도구별 사용법
-
-### 1. CLI 도구
-```bash
-cd tools/mm-reaction-cli
-npm install
-node add-reactions.js
-```
-
-자세한 내용은 `tools/mm-reaction-cli/README.md` 참조
-
-### 2. 웹 UI 도구
 ```bash
 cd tools/mm-reaction-web
 npm install
+```
+
+### 2. 토큰 확인
+
+브라우저로 Mattermost에 로그인하여 확장프로그램이던 뭐던 토큰값을 확인해서 `.env`에 넣던 웹상에서 넣던 합니다.
+
+![쿠키 확인](img/cookies.png)
+
+### 3. 서버 실행
+
+```bash
+cd tools/mm-reaction-web
 npm start
 ```
 
-브라우저에서 http://localhost:5174 접속
+### 4. 댓글 ID 복사
 
-자세한 내용은 `tools/mm-reaction-web/README.md` 참조
+댓글의 ID를 복사하여 Post ID에 붙여넣기 합니다.
 
-## 의존성 설치
+![댓글 링크 복사](img/copy.png)
 
-### 전체 설치
-```bash
-# Web UI
-npm --prefix tools/mm-reaction-web install
+## 기능
 
-# CLI
-npm --prefix tools/mm-reaction-cli install
-```
+채널에 있는 이모지를 검색하여 프리셋으로 저장해 둘 수 있습니다.
+
+![프리셋 기능](img/um.png)
+
+여러분의 창의력을 발휘해서 상대를 깜짝 놀라게 반응을 추가해 보세요!
+
+## 주의사항
+
+`.env.example`은 뒤에 `example`을 지우고 `.env`로 이름을 바꿔 사용하세요.
 

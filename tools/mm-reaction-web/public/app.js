@@ -342,12 +342,14 @@ async function loadLocalConfig() {
   try {
     const res = await fetch('/api/local-config');
     if (!res.ok) throw new Error(String(res.status));
-    const { baseUrl = '', sessionCookie = '' } = await res.json();
+    const { baseUrl = '', sessionCookie = '', mmauthtoken = '', mmcsrf = '' } = await res.json();
     $('#baseUrl').value = baseUrl || '';
     $('#sessionCookie').value = sessionCookie || '';
+    $('#mmauthtoken').value = mmauthtoken || '';
+    $('#mmcsrf').value = mmcsrf || '';
     state.baseUrl = (baseUrl || '').trim().replace(/\/$/, '');
     state.sessionCookie = sessionCookie || '';
-    if (baseUrl || sessionCookie) {
+    if (baseUrl || sessionCookie || mmauthtoken) {
       log('로컬 설정을 불러왔습니다.');
     } else {
       log('로컬 설정 파일이 없어 빈 값으로 시작합니다.');
