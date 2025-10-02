@@ -1,0 +1,31 @@
+:root { --bg:#0f172a; --panel:#111827; --text:#e5e7eb; --muted:#9ca3af; --primary:#6366f1; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Apple Color Emoji,Noto Color Emoji,Helvetica,Arial,sans-serif}
+.container{max-width:1200px;margin:0 auto;padding:24px}
+h1{margin:0 0 16px 0;font-size:24px}
+.panel{background:var(--panel);border-radius:12px;padding:16px;margin-bottom:16px;border:1px solid #1f2937}
+.form-row{display:flex;gap:12px;align-items:center;margin-bottom:10px}
+.form-row label{width:120px;color:var(--muted)}
+.form-row input{flex:1;padding:8px 10px;border-radius:8px;border:1px solid #374151;background:#0b1220;color:var(--text)}
+.actions{display:flex;gap:8px}
+button{cursor:pointer;padding:10px 14px;border-radius:10px;border:1px solid #374151;background:#0b1220;color:var(--text)}
+button.primary{background:var(--primary);border-color:var(--primary);color:white}
+.toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.toolbar input{width:300px;padding:8px 10px;border-radius:8px;border:1px solid #374151;background:#0b1220;color:var(--text)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.card{background:#0b1220;border:1px solid #1f2937;border-radius:12px;padding:10px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.card img{width:64px;height:64px;object-fit:contain;background:#111827;border-radius:8px}
+.card .name{font-size:12px;color:var(--muted);text-align:center}
+pre#log{max-height:240px;overflow:auto;background:#0b1220;border:1px solid #1f2937;border-radius:8px;padding:10px}
+
+/* Selected list (ordered queue) */
+.selected-list{display:flex;flex-wrap:wrap;gap:8px}
+.selected-item{display:flex;align-items:center;gap:8px;background:#0b1220;border:1px solid #1f2937;border-radius:9999px;padding:6px 10px}
+.selected-item img{width:24px;height:24px;object-fit:contain;background:#111827;border-radius:4px}
+.selected-item span{font-size:12px;color:var(--text)}
+.selected-item button.remove{border:1px solid #374151;background:#111827;color:#e5e7eb;border-radius:9999px;width:22px;height:22px;display:flex;align-items:center;justify-content:center;padding:0}
+
+/* Selection log */
+.panel-sub{margin-bottom:8px}
+.panel-sub h3{margin:0 0 6px 0;font-size:14px;color:var(--muted)}
+.mini-log{max-height:120px;overflow:auto;background:#0b1220;border:1px solid #1f2937;border-radius:8px;padding:8px;font-size:12px;color:var(--text)}

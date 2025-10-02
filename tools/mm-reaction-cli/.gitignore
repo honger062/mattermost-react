@@ -1,0 +1,4 @@
+# Do not commit secrets
+config.json
+emoji-map.json
+local-config.json

@@ -1,0 +1,12 @@
+{
+  "base": "https://your-mm.example.com",
+  "baseUrl": "https://your-mm.example.com",
+  "token": "YOUR_PERSONAL_ACCESS_TOKEN",
+  "sessionCookie": "MMAUTHTOKEN=...; MMCSRF=...",
+  "postId": "TARGET_POST_ID",
+  "seq": "0105092645",
+  "emojis": ["thumbsup", "my_custom_1", "heart"],
+  "emojisFile": "emojis.txt",
+  "delayMs": 120,
+  "mapFile": "emoji-map.json"
+}
